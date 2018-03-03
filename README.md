@@ -1,4 +1,6 @@
 # Ansible Role: Docker CE
+[![Build Status](https://travis-ci.org/brentwg/ansible-role-docker.svg?branch=master)](https://travis-ci.org/brentwg/ansible-role-docker)  
+
 Ansible role that installs Docker CE.
 
 ## Requirements  
