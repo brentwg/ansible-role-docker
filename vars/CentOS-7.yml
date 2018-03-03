@@ -7,7 +7,6 @@ docker_packages_old:
   - docker-latest
   - docker-latest-logrotate
   - docker-logrotate
-  - docker-engine-selinux
   - docker-engine
 
 docker_yum_repo_url: https://download.docker.com/linux/centos/docker-ce.repo
