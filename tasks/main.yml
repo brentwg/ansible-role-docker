@@ -2,6 +2,17 @@
 # Variables Configuration
 - import_tasks: variables.yml
 
-# Setup/Install tasks
+# Perform OS-specific family tasks 
 - import_tasks: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
+
+- name: Install Docker
+  package:
+    name: "{{ docker_package_name }}"
+    state: "{{ docker_package_state }}"
+
+- name: Ensure Docker is enabled and started at boot
+  service:
+    name: docker
+    state: started
+    enabled: yes
