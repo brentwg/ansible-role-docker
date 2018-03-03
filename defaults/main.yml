@@ -1,5 +1,9 @@
 ---
 docker_package_name: docker-ce
 docker_package_state: present
-
 docker_gpg_key_url: https://download.docker.com/linux/centos/gpg
+
+# Docker Compose options.
+docker_install_compose: true
+docker_compose_version: "1.19.0"
+docker_compose_path: /usr/local/bin/docker-compose
