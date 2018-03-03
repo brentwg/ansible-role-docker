@@ -1,15 +1,19 @@
 ---
-- name: Uninstall old version of Docker (RHEL)
+- name: Uninstall old version of Docker (RedHat)
   package:
     name: "{{ item }}"
     state: absent
-  with_items:
-    - docker
-    - docker-client
-    - docker-common
-    - docker-latest
-    - docker-latest-logrotate
-    - docker-logrotate
-    - docker-selinux
-    - docker-engine-selinux
-    - docker-engine
+  with_items: "{{ docker_packages_old }}"
+
+- name: Add Docker GPG Key (RedHat)
+  rpm_key:
+    key: docker_gpg_key_url
+    state: present
+
+- name: Add Docker repo (RedHat)
+  get_url:
+    url: "{{ docker_yum_repo_url }}"
+    dest: /etc/yum.repos.d/docker-ce.repo
+    owner: root
+    group: root
+    mode: 0644
