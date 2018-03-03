@@ -1,1 +1,14 @@
 ---
+docker_packages_old:
+  - docker
+  - docker-client
+  - docker-client-latest
+  - docker-common
+  - docker-latest
+  - docker-latest-logrotate
+  - docker-logrotate
+  - docker-selinux
+  - docker-engine-selinux
+  - docker-engine
+
+docker_yum_repo_url: https://download.docker.com/linux/centos/docker-ce.repo

@@ -7,7 +7,7 @@
 
 - name: Add Docker GPG Key (RedHat)
   rpm_key:
-    key: docker_gpg_key_url
+    key: "{{ docker_gpg_key_url }}"
     state: present
 
 - name: Add Docker repo (RedHat)
