@@ -6,6 +6,9 @@
 - import_tasks: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
 
+- import_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+  
 - name: Install Docker
   package:
     name: "{{ docker_package_name }}"
