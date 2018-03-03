@@ -1,3 +1,7 @@
 ---
+# Variables Configuration
+- import_tasks: variables.yml
+
+# Setup/Install tasks
 - import_tasks: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'

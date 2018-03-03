@@ -1,0 +1,10 @@
+---
+# Variables Configuration
+- name: Include OS-specific variables (CentOS)
+  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when: ansible_distribution == 'CentOS'
+
+- name: Include OS-specific variables (Fedora)
+  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version.split('.')[0] }}.yml"
+  when: ansible_distribution == 'Fedora'
+  

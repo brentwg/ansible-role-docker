@@ -1,0 +1,13 @@
+---
+docker_packages_old:
+  - - docker
+    - docker-client
+    - docker-common
+    - docker-latest
+    - docker-latest-logrotate
+    - docker-logrotate
+    - docker-selinux
+    - docker-engine-selinux
+    - docker-engine
+    
+docker_yum_repo_url: https://download.docker.com/linux/fedora/docker-ce.repo
