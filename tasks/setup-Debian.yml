@@ -16,18 +16,13 @@
     - ca-certificates
     - software-properties-common
 
-- name: Copy the Docker REPO file (Debian)
-  copy:
-    src: files/docker.list
-    dest: /etc/apt/sources.list.d/docker.list
-  register: dockerrepofile
-
-- name: Add the GPG key for the official Docker repository
-  shell: |
-    curl -fsSL {{ docker_gpg_key_url }} | sudo apt-key add -
-    sudo apt-get update
+- name: Add Docker apt key (Debian)
+  shell: "curl -sSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -"
   args:
-    executable: /bin/bash
     warn: no
-  when: dockerrepofile.changed
- 
+
+- name: Add Docker repository (Debian)
+  apt_repository:
+    repo: "{{ docker_apt_repository }}"
+    state: present
+    update_cache: yes
