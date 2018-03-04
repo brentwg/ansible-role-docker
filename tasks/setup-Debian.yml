@@ -14,6 +14,7 @@
   with_items:
     - apt-transport-https
     - ca-certificates
+    - software-properties-common
 
 - name: Copy the Docker REPO file (Debian)
   copy:
@@ -27,4 +28,6 @@
     sudo apt-get update
   args:
     executable: /bin/bash
+    warn: no
   when: dockerrepofile.changed
+ 
