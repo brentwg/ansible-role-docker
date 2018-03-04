@@ -1,5 +1,5 @@
 ---
-- name: Ensure old versions of Docker are not installed.
+- name: Ensure old versions of Docker are not installed (Debian)
   package:
     name: '{{ item }}'
     state: absent
@@ -7,7 +7,7 @@
     - docker
     - docker-engine
 
-- name: Ensure depdencies are installed.
+- name: Ensure depdencies are installed (Debian)
   apt:
     name: "{{ item }}"
     state: present
@@ -15,26 +15,16 @@
     - apt-transport-https
     - ca-certificates
 
-- name: Add Docker apt key.
-  apt_key:
-    url: "{{ docker_gpg_key_url }}"
-    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
-    state: present
-  register: add_repository_key
-  ignore_errors: true
+- name: Copy the Docker REPO file (Debian)
+  copy:
+    src: files/docker.list
+    dest: /etc/apt/sources.list.d/docker.list
+  register: dockerrepofile
 
-- name: Ensure curl is present (on older systems without SNI)
-  package: name=curl state=present
-  when: add_repository_key|failed
-
-- name: Add Docker apt key (alternative for older systems without SNI)
-  shell: "curl -sSL {{ docker_gpg_key_url }} | sudo apt-key add -"
+- name: Add the GPG key for the official Docker repository
+  shell: |
+    curl -fsSL {{ docker_gpg_key_url }} | sudo apt-key add -
+    sudo apt-get update
   args:
-    warn: no
-  when: add_repository_key|failed
-
-- name: Add Docker repository
-  apt_repository:
-    repo: "{{ docker_apt_repository }}"
-    state: present
-    update_cache: yes
+    executable: /bin/bash
+  when: dockerrepofile.changed
