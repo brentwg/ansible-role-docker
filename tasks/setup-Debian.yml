@@ -34,4 +34,5 @@
   apt_repository:
     repo: "{{ docker_apt_repository }}"
     state: present
+    filename: docker_ce
     update_cache: yes
